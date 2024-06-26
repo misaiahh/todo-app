@@ -5,8 +5,8 @@ A basic application using only vanilla JavaScript with TypeScript
 ## Features
 
 - Button component
-- Feature 2
-- Feature 3
+- Infinite scroller component
+- Search Bar
 
 ## Getting Started
 
@@ -15,7 +15,15 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 - `npm eslint . --fix` to lint the project
-- TODO: add command for unit tests
+- `npm test` to test the project
+
+## Extensions
+- Codeium
+- Docker
+- ESLint
+- GitLens
+- Vitest
+- Thunder Client (Optional)
 
 ### Installation
 
