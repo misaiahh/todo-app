@@ -1,10 +1,10 @@
-# Project Name
+# ToDo App
 
-This is a brief description of your project.
+A basic application using only vanilla JavaScript with TypeScript
 
 ## Features
 
-- Feature 1
+- Button component
 - Feature 2
 - Feature 3
 
@@ -15,10 +15,10 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 - `npm eslint . --fix` to lint the project
-- Prerequisite 2
+- TODO: add command for unit tests
 
 ### Installation
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/your-username/your-project.git
+   git clone https://github.com/misaiahh/todo-app
