@@ -1,11 +1,16 @@
 import './style.css';
-import { setupCounter } from './counter.ts';
+// import { setupCounter } from './counter.ts';
+import './components/TodoList.ts';
+import './components/TodoItem.ts';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <h1>TODO</h1>
-    <div>Content</div>
+    <div>
+      <todo-list></todo-list>
+    </div>
   </div>
 `;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
+// leaving this here for reference
+// setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
