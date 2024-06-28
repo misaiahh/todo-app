@@ -1,26 +1,28 @@
-class TodoList extends HTMLElement {
+class TodoList extends HTMLDivElement {
     constructor() {
         super();
+        this.attachShadow({ mode: "open" });
     }
 
     connectedCallback() {
         console.log("TodoList added to page.");
-        const shadow = this.attachShadow({ mode: "open" });
         
-        const div = document.createElement("div");
-        div.setAttribute("class", "todo-list");
-        
-        const todos = [];
 
-        const todoItem = document.createElement('todo-item');
-        
-        todos.push(todoItem);
+        const style = document.createElement("style");
+        style.textContent = `
+            :host {
+                display: flex;
+                flex-direction: column;
+            }
+        `;
+        this.shadowRoot?.appendChild(style);
 
-        todos.map((todo) => {
-            div.appendChild(todo);
+        const listOfTodos = ['Todo 1', 'Todo 2', 'Todo 3'];
+        listOfTodos.map((todo) => {
+            const todoItem = document.createElement('todo-item');
+            todoItem.textContent = todo;
+            this.shadowRoot?.appendChild(todoItem);
         });
-        
-        shadow.appendChild(div);
     }
 
     disconnectedCallback() {
@@ -36,6 +38,8 @@ class TodoList extends HTMLElement {
     }
 }
 
-customElements.define('todo-list', TodoList);
+customElements.define('todo-list', TodoList, {
+    extends: 'div'
+});
 
 export default TodoList;
