@@ -1,18 +1,25 @@
-class TodoItem extends HTMLElement {
+class TodoItem extends HTMLParagraphElement {
+    static observedAttributes = ['textContent'];
+
     constructor() {
         super();
     }
 
     connectedCallback() {
-        console.log("Todo added to page.");
+        console.log("TodoItem added to page.");
+    }
 
-        const p = document.createElement("p");
-        p.textContent = "Todo";
+    attributeChangedCallback(name: string, _oldValue: string, _newValue: string) {
+        console.log(`Attribute ${name} has changed from ${_oldValue} to ${_newValue}.`);
 
-        this.appendChild(p);
+        if (name === 'textContent') {
+            this.querySelector('p')!.textContent = _newValue;
+        }
     }
 }
 
-customElements.define('todo-item', TodoItem);
+customElements.define('todo-item', TodoItem, {
+    extends: 'p'
+});
 
 export default TodoItem;
