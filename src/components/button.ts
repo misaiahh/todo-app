@@ -1,4 +1,4 @@
-class Button extends HTMLButtonElement {
+export default class Button extends HTMLButtonElement {
     constructor() {
         super();
     }

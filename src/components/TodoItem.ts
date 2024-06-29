@@ -1,6 +1,6 @@
 import { getElementAttributes } from '../lib';
 
-class TodoItem extends HTMLParagraphElement {
+export default class TodoItem extends HTMLParagraphElement {
     constructor() {
         super();
     }

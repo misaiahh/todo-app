@@ -1,10 +1,13 @@
-class TodoList extends HTMLElement {
+export default class TodoList extends HTMLElement {
+    root: ShadowRoot;
     todos: string[];
+    addButton: HTMLButtonElement | null;
 
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
+        this.root = this.attachShadow({ mode: 'open' });
         this.todos = [];
+        this.addButton = null;
     }
 
     connectedCallback() {
@@ -25,7 +28,7 @@ class TodoList extends HTMLElement {
     }
 
     render() {
-        this.shadowRoot!.innerHTML = `
+        this.root.innerHTML = `
             <style>
                 :host {
                     display: flex;
@@ -34,7 +37,7 @@ class TodoList extends HTMLElement {
             </style>
             
             ${this.todos.length ?
-                `<div>
+                `<div class="todo-list">
                     ${this.todos
                     .map((todo) => `<p is="todo-item" text-content="${todo}"></p>`)
                     .join('')}
@@ -43,8 +46,8 @@ class TodoList extends HTMLElement {
                 '<p>There are no todos</p>'}
             <button class="add-todo" is="todo-button">Add Todo</button>
         `;
-
-        this.shadowRoot?.querySelector('.add-todo')?.addEventListener('click', () => this.addTodo());
+        this.addButton = this.root.querySelector('.add-todo');
+        this.addButton!.addEventListener('click', () => this.addTodo());
     }
 }
 
