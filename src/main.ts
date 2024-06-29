@@ -1,7 +1,9 @@
 import './style.css';
 // import { setupCounter } from './counter.ts';
+import './components/button.ts';
 import './components/TodoList.ts';
 import './components/TodoItem.ts';
+
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
