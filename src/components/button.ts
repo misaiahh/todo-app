@@ -2,6 +2,7 @@ class Button extends HTMLButtonElement {
     constructor() {
         super();
     }
+
     connectedCallback() {
         this.innerHTML = 'Click me and check the console';
         this.addEventListener('click', () => {
@@ -10,4 +11,6 @@ class Button extends HTMLButtonElement {
     }
 }
 
-export default Button;
+customElements.define('todo-button', Button, {
+    extends: 'button'
+});
