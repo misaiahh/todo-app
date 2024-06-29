@@ -1,3 +1,3 @@
-import getElementAttributes from "./getElementAttributes";
+import getElementAttributes from './getElementAttributes';
 
 export { getElementAttributes };

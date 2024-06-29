@@ -3,7 +3,7 @@ class TodoList extends HTMLElement {
 
     constructor() {
         super();
-        this.attachShadow({ mode: "open" });
+        this.attachShadow({ mode: 'open' });
         this.todos = [];
     }
 
@@ -37,7 +37,7 @@ class TodoList extends HTMLElement {
                 `<div>
                     ${this.todos
                     .map((todo) => `<p is="todo-item" text-content="${todo}"></p>`)
-                    .join("")}
+                    .join('')}
                 </div>`
                 :
                 '<p>There are no todos</p>'}

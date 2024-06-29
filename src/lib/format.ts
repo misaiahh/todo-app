@@ -6,9 +6,9 @@
  */
 function formatFirstName(name: string): string {
     return name
-        .split(" ")
+        .split(' ')
         .map((n) => n[0])
-        .join("");
+        .join('');
 }
 
 export { formatFirstName };

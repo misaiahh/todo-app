@@ -1,4 +1,4 @@
-import { getElementAttributes } from "../lib";
+import { getElementAttributes } from '../lib';
 
 class TodoItem extends HTMLParagraphElement {
     constructor() {
@@ -7,7 +7,7 @@ class TodoItem extends HTMLParagraphElement {
 
     connectedCallback() {
         console.info(getElementAttributes(this));
-        this.textContent = getElementAttributes(this)["text-content"];
+        this.textContent = getElementAttributes(this)['text-content'];
     }
 }
 
