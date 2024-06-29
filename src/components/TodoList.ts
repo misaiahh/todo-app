@@ -39,7 +39,7 @@ export default class TodoList extends HTMLElement {
             ${this.todos.length ?
                 `<div class="todo-list">
                     ${this.todos
-                    .map((todo) => `<p is="todo-item" text-content="${todo}"></p>`)
+                    .map((todo, index) => `<p is="todo-item" data-index="${index}" text-content="${todo}"></p>`)
                     .join('')}
                 </div>`
                 :
