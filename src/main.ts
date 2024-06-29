@@ -7,7 +7,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <h1>TODO</h1>
     <div>
-      <div is="todo-list"></div>
+      <todo-list></todo-list>
     </div>
   </div>
 `;

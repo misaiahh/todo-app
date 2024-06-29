@@ -1,45 +1,36 @@
-class TodoList extends HTMLDivElement {
+class TodoList extends HTMLElement {
+    todos: string[];
+
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
+        this.todos = [];
     }
 
     connectedCallback() {
-        console.log("TodoList added to page.");
-        
+        this.render();
+    }
 
-        const style = document.createElement("style");
-        style.textContent = `
-            :host {
+    static get observedAttributes() {
+        return ['todos'];
+    }
+
+    render() {
+        this.todos = ['todo 1', 'todo 2', 'todo 3'];
+        this.shadowRoot!.innerHTML = `
+            <style>
+                :host {
                 display: flex;
                 flex-direction: column;
             }
+            </style>
+            <div>
+                ${this.todos
+                .map((todo) => `<p is="todo-item" text-content="${todo}"></p>`)
+                .join("")}
+            </div>
         `;
-        this.shadowRoot?.appendChild(style);
-
-        const listOfTodos = ['Todo 1', 'Todo 2', 'Todo 3'];
-        listOfTodos.map((todo) => {
-            const todoItem = document.createElement('todo-item');
-            todoItem.textContent = todo;
-            this.shadowRoot?.appendChild(todoItem);
-        });
-    }
-
-    disconnectedCallback() {
-        console.log("TodoList removed from page.");
-    }
-
-    adoptedCallback() {
-        console.log("TodoList moved to new page.");
-    }
-
-    attributeChangedCallback(name: string, _oldValue: string, _newValue: string) {
-        console.log(`Attribute ${name} has changed from ${_oldValue} to ${_newValue}.`);
     }
 }
 
-customElements.define('todo-list', TodoList, {
-    extends: 'div'
-});
-
-export default TodoList;
+customElements.define('todo-list', TodoList);
