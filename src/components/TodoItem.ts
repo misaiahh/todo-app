@@ -1,10 +1,13 @@
+import { getElementAttributes } from "../lib";
+
 class TodoItem extends HTMLParagraphElement {
     constructor() {
         super();
     }
 
     connectedCallback() {
-        this.textContent = this.getAttribute("text-content");
+        console.info(getElementAttributes(this));
+        this.textContent = getElementAttributes(this)["text-content"];
     }
 }
 

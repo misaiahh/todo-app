@@ -1,6 +1,6 @@
 import './style.css';
 // import { setupCounter } from './counter.ts';
-import './components/button.ts';
+import './components/Button.ts';
 import './components/TodoList.ts';
 import './components/TodoItem.ts';
 
