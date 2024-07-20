@@ -41,11 +41,18 @@ export default class TodoList extends HTMLElement {
         this.setState({ state: todos });
     }
 
+    /**
+     * Removes a todo item from the list based on the index provided in the event.
+     *
+     * @param {Event} event - The event object containing the index of the todo item to be removed.
+     * @return {void} This function does not return anything.
+     */
     removeTodo(event: Event): void {
         const todos = [...this.state];
         todos.splice((event as DeleteTodoEvent).detail.index, 1);
         this.setState({ state: todos });
     }
+
 
     /**
      * Renders the component's HTML content and sets up event listeners.
