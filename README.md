@@ -1,6 +1,6 @@
 # ToDo App
 
-A basic application using only vanilla JavaScript with TypeScript
+A basic application using only vanilla web components with TypeScript, Vite, and Vitest.
 
 ## Features
 
