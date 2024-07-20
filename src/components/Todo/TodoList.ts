@@ -1,16 +1,29 @@
 import { DeleteTodoEvent } from './Todo.types';
 
 export default class TodoList extends HTMLElement {
-    state: string[] = [];
+    todos: string[] = [];
 
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
     }
 
+    static get observedAttributes() {
+        return ['todos'];
+    }
+
+    attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+        if (name === 'todos' && oldValue !== newValue) {
+            if (newValue.length === 0) {
+                this.setTodos({ todos: [] });
+            } else {
+                this.setTodos({ todos: newValue.split(',') });
+            }
+        }
+    }
+
     connectedCallback() {
-        const todos = ['todo 1', 'todo 2', 'todo 3'];
-        this.setState({ state: todos });
+        this.setTodos({ todos: this.getAttribute('todos')!.split(',') });
     }
 
     disconnectedCallback() {
@@ -22,7 +35,7 @@ export default class TodoList extends HTMLElement {
      *
      * @param {Record<string, unknown>} newState - The new state to be set.
      */
-    setState(newState: Record<string, unknown>) {
+    setTodos(newState: Record<string, unknown>) {
         Object.assign(this, newState);
         this.render();
     }
@@ -37,14 +50,20 @@ export default class TodoList extends HTMLElement {
      * @return {void} This function does not return anything.
      */
     addTodo(): void {
-        const todos = [...this.state, `todo ${this.state.length + 1}`];
-        this.setState({ state: todos });
+        const todos = [...this.todos, `todo ${this.todos.length + 1}`];
+        this.setTodos({ todos });
     }
 
+    /**
+     * Removes a todo item from the list based on the index provided in the event.
+     *
+     * @param {Event} event - The event object containing the index of the todo item to be removed.
+     * @return {void} This function does not return anything.
+     */
     removeTodo(event: Event): void {
-        const todos = [...this.state];
+        const todos = [...this.todos];
         todos.splice((event as DeleteTodoEvent).detail.index, 1);
-        this.setState({ state: todos });
+        this.setTodos({ todos });
     }
 
     /**
@@ -68,9 +87,9 @@ export default class TodoList extends HTMLElement {
                 }
             </style>
             
-            ${this.state.length ?
+            ${this.todos.length ?
                 `<div>
-                    ${this.state
+                    ${this.todos
                     .map((todo, index) => `<todo-item data-index="${index}" text-content="${todo}"></todo-item>`)
                     .join('')}
                 </div>`
