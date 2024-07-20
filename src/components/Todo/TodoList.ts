@@ -15,41 +15,36 @@ export default class TodoList extends HTMLElement {
 
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
         if (name === 'search' && oldValue !== newValue) {
-            this.setSearch(newValue);
+            this.setState({ search: newValue });
         }
     }
 
     connectedCallback() {
-        // default list of todos
-        this.setTodos({ todos: ['todo 1', 'todo 2', 'todo 3'] });
+        this.setState({ todos: ['todo 1', 'todo 2', 'todo 3'] });
     }
 
     disconnectedCallback() {
         this.shadowRoot!.querySelectorAll('todo-item').forEach((todo) => todo.removeEventListener('delete-todo', this.removeTodo));
     }
 
-    setTodos(newState: Record<string, unknown>): void {
+    setState(newState: Record<string, unknown>): void {
         Object.assign(this, newState);
-        this.render();
-    }
-
-    setSearch(search: string): void {
-        this.search = search;
         this.render();
     }
 
     addTodo(): void {
         const todos = [...this.todos, `todo ${this.todos.length + 1}`];
-        this.setTodos({ todos });
+        this.setState({ todos });
     }
 
     removeTodo(event: Event): void {
         const todos = [...this.todos];
         todos.splice((event as DeleteTodoEvent).detail.index, 1);
-        this.setTodos({ todos });
+        this.setState({ todos });
     }
 
     render(): void {
+        const _todos = this.todos.filter((todo) => todo.toLowerCase().includes(this.search.toLowerCase()));
         this.shadowRoot!.innerHTML = `
             <style>
                 :host {
@@ -58,10 +53,9 @@ export default class TodoList extends HTMLElement {
                 }
             </style>
             
-            ${this.todos.length ?
+            ${_todos.length ?
                 `<div>
-                    ${this.todos
-                    .filter((todo) => todo.toLowerCase().includes(this.search.toLowerCase()))
+                    ${_todos
                     .map((todo, index) => `<todo-item data-index="${index}" text-content="${todo}"></todo-item>`)
                     .join('')}
                 </div>`
