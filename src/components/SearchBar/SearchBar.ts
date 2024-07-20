@@ -7,10 +7,8 @@ export default class SearchBar extends HTMLInputElement {
         this.type = 'text';
         this.placeholder = 'Search...';
 
-        this.addEventListener('input', (event: Event) => {
-            if ((event.target as HTMLInputElement).value.length) {
-                this.dispatchEvent(new CustomEvent('search', { detail: { text: this.value } }));
-            }
+        this.addEventListener('input', () => {
+            this.dispatchEvent(new CustomEvent('search', { detail: { text: this.value } }));
         });
     }
 }
