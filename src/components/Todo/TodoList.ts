@@ -1,8 +1,4 @@
-interface DeleteTodoEvent extends CustomEvent {
-    detail: {
-        index: number;
-    };
-}
+import { DeleteTodoEvent } from './Todo.types';
 
 export default class TodoList extends HTMLElement {
     state: string[] = [];
