@@ -16,6 +16,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 - `npm eslint . --fix` to lint the project
 - `npm test` to test the project
+- `npm run build` to build the project
+- `npm run preview` to preview the project
+- `npm run dev` to start the project
 
 ## Extensions
 - Codeium
