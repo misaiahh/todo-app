@@ -14,7 +14,7 @@ export default class TodoList extends HTMLElement {
     }
 
     disconnectedCallback() {
-        this.shadowRoot!.querySelectorAll('todo-item').forEach((todo) => todo.remove());
+        this.shadowRoot!.querySelectorAll('todo-item').forEach((todo) => todo.removeEventListener('delete-todo', this.removeTodo));
     }
 
     /**
