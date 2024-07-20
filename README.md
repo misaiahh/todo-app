@@ -22,7 +22,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Extensions
 - Codeium
-- Docker
+- Docker (not implemented yet)
 - ESLint
 - GitLens
 - Vitest
