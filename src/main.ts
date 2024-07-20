@@ -5,14 +5,14 @@ import './components/Todo';
 import './components/SearchBar';
 import './components/InfiniteScroll';
 
-const todos = ['todo 1', 'todo 2', 'todo 3'];
+// const _todos = ['todo 1', 'todo 2', 'todo 3'];
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <h1>TODO</h1>
     <div>
       <infinite-scroll></infinite-scroll>
       <input is="search-bar" id="search-bar"></input>
-      <todo-list todos="${todos}"></todo-list></todo-list>
+      <todo-list search=""></todo-list></todo-list>
     </div>
 `;
 
@@ -21,13 +21,7 @@ const todoList = document.querySelector('todo-list');
 
 searchBar?.addEventListener('search', (event: Event) => {
   const detail = (event as CustomEvent).detail;
-  console.log(detail.text);
-  const _todos = todoList?.getAttribute('todos')?.split(',') || [];
-  if (!detail.text.length) {
-    todoList?.setAttribute('todos', todos.toString());
-    return;
-  }
-  todoList?.setAttribute('todos', _todos.filter((todo) => todo.includes(detail.text)).toString());
+  todoList?.setAttribute('search', detail.text);
 });
 
 
