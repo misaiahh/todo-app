@@ -14,7 +14,11 @@ export default class TodoList extends HTMLElement {
 
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
         if (name === 'todos' && oldValue !== newValue) {
-            this.setTodos({ todos: newValue.split(',') });
+            if (newValue.length === 0) {
+                this.setTodos({ todos: [] });
+            } else {
+                this.setTodos({ todos: newValue.split(',') });
+            }
         }
     }
 

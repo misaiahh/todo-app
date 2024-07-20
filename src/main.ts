@@ -18,10 +18,14 @@ const searchBar = document.querySelector('input[is="search-bar"]');
 const todoList = document.querySelector('todo-list');
 
 searchBar?.addEventListener('search', (event: Event) => {
-    const detail = (event as CustomEvent).detail;
-    console.log(detail.text);
-    todoList?.getAttribute('todos');
-    todoList?.setAttribute('search', detail.text);
+  const detail = (event as CustomEvent).detail;
+  console.log(detail.text);
+  const _todos = todoList?.getAttribute('todos')?.split(',') || [];
+  if (!detail.text.length) {
+    todoList?.setAttribute('todos', todos.toString());
+    return;
+  }
+  todoList?.setAttribute('todos', _todos.filter((todo) => todo.includes(detail.text)).toString());
 });
 
 
