@@ -57,16 +57,24 @@ export default class TodoList extends HTMLElement {
             </style>
             
             ${this.state.length ?
-                `<div class="todo-list">
+                `<div>
                     ${this.state
-                    .map((todo, index) => `<p is="todo-item" data-index="${index}" text-content="${todo}"></p>`)
+                    .map((todo, index) => `<todo-item data-index="${index}" text-content="${todo}"></todo-item>`)
                     .join('')}
                 </div>`
                 :
                 '<p>There are no todos</p>'}
-            <button class="add-todo" is="todo-button">Add Todo</button>
+            <button is="todo-button" text="Add Todo"></button>
         `;
-        this.shadowRoot!.querySelector('.add-todo')!.addEventListener('click', () => this.addTodo());
+        this.shadowRoot!.querySelector('button')!.addEventListener('click', () => this.addTodo());
+        Array.from(this.shadowRoot!.querySelectorAll('todo-item')).forEach((item) => item.addEventListener('delete-todo', (event: Event) => {
+            const detail = (event as CustomEvent).detail;
+            console.log(detail);
+            const index = detail.index;
+            const todos = [...this.state];
+            todos.splice(index, 1);
+            this.setState({ state: todos });
+        }));
     }
 }
 

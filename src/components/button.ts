@@ -4,10 +4,7 @@ export default class Button extends HTMLButtonElement {
     }
 
     connectedCallback() {
-        this.innerHTML = 'Click me and check the console';
-        this.addEventListener('click', () => {
-            console.log('Clicked');
-        });
+        this.innerHTML = `${this.getAttribute('text') || 'Click'}`;
     }
 }
 
