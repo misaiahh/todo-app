@@ -23,10 +23,11 @@ These instructions will get you a copy of the project up and running on your loc
 ## Extensions
 - Codeium (Optional)
 - Docker (not implemented yet)
-- ESLint
-- GitLens
-- Vitest
+- ESLint (Optional)
+- GitLens (Optional)
+- Vitest (Optional)
 - Thunder Client (Optional)
+- Name: ES6 String HTML (Optional for intellisense for string interpolation)
 
 ### Installation
 
