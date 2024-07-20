@@ -1,3 +1,9 @@
+interface DeleteTodoEvent extends CustomEvent {
+    detail: {
+        index: number;
+    };
+}
+
 export default class TodoList extends HTMLElement {
     state: string[] = [];
 
@@ -9,6 +15,10 @@ export default class TodoList extends HTMLElement {
     connectedCallback() {
         const todos = ['todo 1', 'todo 2', 'todo 3'];
         this.setState({ state: todos });
+    }
+
+    disconnectedCallback() {
+        this.shadowRoot!.querySelectorAll('todo-item').forEach((todo) => todo.remove());
     }
 
     /**
@@ -32,6 +42,12 @@ export default class TodoList extends HTMLElement {
      */
     addTodo(): void {
         const todos = [...this.state, `todo ${this.state.length + 1}`];
+        this.setState({ state: todos });
+    }
+
+    removeTodo(event: Event): void {
+        const todos = [...this.state];
+        todos.splice((event as DeleteTodoEvent).detail.index, 1);
         this.setState({ state: todos });
     }
 
@@ -67,14 +83,7 @@ export default class TodoList extends HTMLElement {
             <button is="todo-button" text="Add Todo"></button>
         `;
         this.shadowRoot!.querySelector('button')!.addEventListener('click', () => this.addTodo());
-        Array.from(this.shadowRoot!.querySelectorAll('todo-item')).forEach((item) => item.addEventListener('delete-todo', (event: Event) => {
-            const detail = (event as CustomEvent).detail;
-            console.log(detail);
-            const index = detail.index;
-            const todos = [...this.state];
-            todos.splice(index, 1);
-            this.setState({ state: todos });
-        }));
+        this.shadowRoot!.querySelectorAll('todo-item').forEach((todo) => todo.addEventListener('delete-todo', (event: Event) => this.removeTodo(event)));
     }
 }
 
