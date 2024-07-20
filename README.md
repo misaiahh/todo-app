@@ -21,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 - `npm run dev` to start the project
 
 ## Extensions
-- Codeium
+- Codeium (Optional)
 - Docker (not implemented yet)
 - ESLint
 - GitLens
